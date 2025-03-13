@@ -1,0 +1,11 @@
+body{
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    padding: 0;
+    margin:10%;
+    justify-items: center;
+    height: 40vh;
+}
+div{
+    margin: 2%;
+}
