@@ -1,43 +1,72 @@
-/* input = document.getElementById("task_input")
-button = document.getElementById("add")
-taskDiv= document.getElementById("taskDiv")
-tasks=[]
-     
-button.addEventListener("click", function() {
-    tasks.push(input.value);
-    let para = document.createElement("div")
-    para.id = "tasks"
-    let text = document.createTextNode(input.value)
-    para.appendChild(text)
-    taskDiv.appendChild(para)
-    input.value = "" // clear input field after adding a task
-}); */
-// Wait for the DOM to be fully loaded before accessing elements
+const tasks = new Map(); // Global task storage
 
-window.addEventListener('load', function() {
-    const input = document.getElementById("task_input");
-    const button = document.getElementById("add");
-    const taskDiv = document.getElementById("taskDiv");
-    const tasks = new Map(); // Initialize tasks array
-  
-    button.addEventListener("click", function() {
-      const taskText = input.value.trim(); // Trim whitespace
-      if (taskText !== "") { // Prevent adding empty tasks
-          const id= new Date().toISOString();
-          tasks.set(id ,taskText);
-          const newParagraph = document.createElement("p"); // Create <p> element
-          newParagraph.textContent = tasks.get(id); // Set its content (more efficient)
-          newParagraph.setAttribute("class","tasks")
-          newParagraph.setAttribute("onclick","edit_task(this)")
-          newParagraph.setAttribute("id",id)
-          taskDiv.appendChild(newParagraph); // Append <p> to taskDiv
-          input.value = ""; // Clear the input field
-      }
-    });
-    
+window.addEventListener('load', () => {
+  const taskDiv = document.getElementById('taskDiv');
+  const addButton = document.getElementById('add');
+  const taskInput = document.getElementById('task_input');
+
+  // Event delegation for edit clicks
+  taskDiv.addEventListener('click', (e) => {
+    if (e.target.classList.contains('tasks_label')) {
+      enterEditMode(e.target);
+    }
   });
-  function edit_task(element){
-    const input = prompt("EDIT TASK",element.textContent)
-    element.innerHTML=input
-    
-  }
+
+  addButton.addEventListener('click', () => {
+    const text = taskInput.value.trim();
+    if (text) {
+      const id = Date.now().toString();
+      tasks.set(id, text);
+      renderTask(id, text);
+      taskInput.value = '';
+    }
+  });
+});
+
+function renderTask(id, text) {
+  const li = document.createElement('li');
+  li.className = 'tasks_li';
+  
+  const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+
+  const label = document.createElement('label');
+  label.className = 'tasks_label';
+  label.dataset.taskId = id; // Use data attribute instead of ID
+  label.textContent = text;
+
+  li.append(checkbox, label);
+  document.getElementById('taskDiv').appendChild(li);
+}
+
+function enterEditMode(label) {
+  const id = label.dataset.taskId;
+  const originalText = tasks.get(id);
+
+  const form = document.createElement('form');
+  form.innerHTML = `
+    <input type="text" 
+           id="edit_${id}" 
+           name="task_edit" 
+           value="${originalText}"
+           class="edit-input">
+    <button type="submit">Update</button>
+  `;
+
+  // Replace label content with form
+  label.innerHTML = '';
+  label.appendChild(form);
+
+  // Focus input immediately
+  form.querySelector('input').focus();
+
+  // Handle form submission
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const newText = form.querySelector('input').value.trim();
+    if (newText) {
+      tasks.set(id, newText);
+      label.textContent = newText; // Revert to label state
+    }
+  });
+}

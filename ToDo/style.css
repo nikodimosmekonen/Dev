@@ -9,3 +9,8 @@ body{
 div{
     margin: 2%;
 }
+li.tasks_li{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
