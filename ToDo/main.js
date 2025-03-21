@@ -24,49 +24,56 @@ window.addEventListener('load', () => {
 });
 
 function renderTask(id, text) {
-  const li = document.createElement('li');
-  li.className = 'tasks_li';
+  const div = document.createElement('div');
+  div.className = 'tasks_div';
   
   const checkbox = document.createElement('input');
   checkbox.type = 'checkbox';
 
   const label = document.createElement('label');
   label.className = 'tasks_label';
-  label.dataset.taskId = id; // Use data attribute instead of ID
+  label.dataset.taskId = id; 
   label.textContent = text;
 
-  li.append(checkbox, label);
-  document.getElementById('taskDiv').appendChild(li);
+  div.append(checkbox, label);
+  document.getElementById('taskDiv').appendChild(div);
 }
 
 function enterEditMode(label) {
   const id = label.dataset.taskId;
   const originalText = tasks.get(id);
 
-  const form = document.createElement('form');
-  form.innerHTML = `
+  const edit_div = document.createElement('div');
+  edit_div.innerHTML = `
     <input type="text" 
            id="edit_${id}" 
            name="task_edit" 
            value="${originalText}"
            class="edit-input">
-    <button type="submit">Update</button>
+    <button onclick="Update('${id}')">Update</button>
+    <button onclick="Delete('${id}')">Delete</button>
   `;
 
   // Replace label content with form
   label.innerHTML = '';
-  label.appendChild(form);
+  label.appendChild(edit_div);
 
   // Focus input immediately
-  form.querySelector('input').focus();
-
-  // Handle form submission
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const newText = form.querySelector('input').value.trim();
-    if (newText) {
-      tasks.set(id, newText);
-      label.textContent = newText; // Revert to label state
+  edit_div.querySelector('input').focus();
+}
+function Update(id){
+  const label = document.querySelector(`[data-task-id="${id}"]`);
+  const input = document.querySelector(`[id="edit_${id}"]`);
+  const newText = input.value.trim();
+  if (newText) {
+    tasks.set(id, newText);
+    label.innerHTML = '';
+    label.textContent = newText;
     }
-  });
+}
+function Delete (id){
+  const div = document.querySelector(`[data-task-id="${id}"]`).closest("div");
+  div.innerHTML = '';
+  tasks.delete(id)
+  div.remove()
 }
