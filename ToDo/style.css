@@ -14,3 +14,9 @@ li.tasks_li{
     margin: 0;
     padding: 0;
 }
+.tasks_div label{
+    display: inline;
+}
+.tasks_div input{
+    display: inline;   
+}
