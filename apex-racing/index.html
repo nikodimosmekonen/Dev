@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
     <title>Document</title>
 </head>
 <body>
     <header>
         <nav>
-            <a href="">
+            <a href="index.html">
                 <section class="nav-left-container">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flag-icon">
                         <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
@@ -18,8 +19,11 @@
                     APEX RACING
                 </section>
             </a>
-            <section class="nav-right-container">
-                <ul class="nav-list">
+            <button aria-controls="nav-right-container" class="mobile-nav-toggle" aria-expanded="false">
+
+            </button>
+            <section id="nav-right-container" class="nav-right-container">
+                <ul class="nav-list" data-visible="false">
                     <li>
                         <a href="" class="nav-link">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon">

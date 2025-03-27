@@ -10,11 +10,24 @@
 a{
     text-decoration: none;
 
-}   
+} 
+body{
+    overflow: hidden;
+}
 header{
     background-color: var(--background-color);
     position: sticky;
     top: 0;
+}
+.mobile-nav-toggle {
+    display: none; /* Hidden by default */
+    border: 0;
+    position: absolute;
+    background: url(asset/menu_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg);
+    aspect-ratio: 1;
+    width: 1.9rem;
+    background-repeat: no-repeat;
+    z-index: 1000;
 }
 
 nav{
@@ -51,7 +64,7 @@ nav{
     display: flex;
     align-items: center;
     gap: 0.2rem;
-}
+}sticky
 .nav-link:hover,
 .nav-link.active {
   color: var(--primary);
@@ -67,6 +80,19 @@ nav{
 }
 
 @media (max-width: 760px){
+    .mobile-nav-toggle {
+        display: block;
+        right: 12px;
+        top: 1.5rem;
+    }
+
+    .nav-list[data-visible="true"]{
+        transform: translateX(0%);
+    }
+    nav{
+        justify-content: start;
+        padding: 1.2rem;
+    }  
     .nav-list{
         position: absolute;
         flex-direction: column;
@@ -75,9 +101,6 @@ nav{
         padding: 2rem 1.5rem;
         height: fit-content;
         gap: 2rem;
-    }
-    nav{
-        justify-content: start;
-        padding: 1.2rem;
+        transform: translateX(100%);
     }
 }
