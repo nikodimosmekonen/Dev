@@ -35,10 +35,16 @@ nav{
 .nav-list{
     list-style: none;
     display: flex;
+    align-items: flex-start;
     gap: 1rem;
     color: #ffffff;
-    font-weight: 500;
-    font-size:medium;
+    font-weight: 450;
+    font-size: 0.9rem;
+}
+.nav-link{
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
 }
 .nav-link:hover,
 .nav-link.active {
@@ -47,4 +53,27 @@ nav{
 
 .nav-right-container a:visited { 
     color: #ffffff; 
+}
+@media (max-width: 1200px){
+    nav{
+        justify-content: space-between;
+        padding: 1.2rem;
+    }
+}
+
+@media (max-width: 760px){
+    .nav-list{
+        position: absolute;
+        flex-direction: column;
+        background-color: var(--background-color);
+        /* flex-shrink: 0; */
+        inset: 3.9rem 0 0 0;
+        padding: 2rem 1.5rem;
+        height: fit-content;
+        gap: 2rem;
+    }
+    nav{
+        justify-content: start;
+        padding: 1.2rem;
+    }
 }
