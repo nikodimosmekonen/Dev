@@ -10,14 +10,20 @@
 a{
     text-decoration: none;
 
+}   
+header{
+    background-color: var(--background-color);
+    position: sticky;
+    top: 0;
 }
 
 nav{
-    background-color: var(--background-color);
     display: flex;
-    justify-content: space-around;
-    padding: 1.3rem 0;
-    position: sticky;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto; 
+    padding: 1.3rem 2rem;
 
 }
 .nav-left-container {
@@ -56,7 +62,6 @@ nav{
 }
 @media (max-width: 1200px){
     nav{
-        justify-content: space-between;
         padding: 1.2rem;
     }
 }
@@ -66,7 +71,6 @@ nav{
         position: absolute;
         flex-direction: column;
         background-color: var(--background-color);
-        /* flex-shrink: 0; */
         inset: 3.9rem 0 0 0;
         padding: 2rem 1.5rem;
         height: fit-content;
