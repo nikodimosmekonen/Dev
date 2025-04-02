@@ -27,10 +27,9 @@
 }
 a{
     text-decoration: none;
-
 } 
 body{
-    overflow: hidden;
+    overflow-x: hidden;
 }
 header{
     background-color: var(--background-color);
@@ -43,51 +42,87 @@ header{
     position: absolute;
     background: url(asset/menu_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg);
     aspect-ratio: 1;
-    width: 1.9rem;
+    width: 1.9em;
     background-repeat: no-repeat;
     z-index: 1000;
 }
-.landing{
-    background-image: linear-gradient(to right, red,rgba(64, 113, 247, 0.993));
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 80vh;
-}
+
 nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
     max-width: 1200px;
-    margin: 0 auto; 
+    margin: 0 auto;
     padding: 1.3rem 2rem;
 
 }
-.nav-button{
+.hero{
+    background: linear-gradient(to top, #04049f, black);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    gap: 2rem;
+}
+.hero-title-container{
+    display: flex;
+    text-align: center;
+    background-image: linear-gradient(to right, red,rgba(64, 113, 247, 0.993));
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+.hero-title{
+    font-weight: 900;
+    font-size: 4rem;
+}
+.hero-subtitle{
+    color: var(--accent-foreground);
+    font-weight: 450;
+    font-size: 1.2em;
+}
+.hero-subtitle-container{
+    display: flex;
+    text-align: center;
+    max-width: 35rem;
+}
+.hero-button-container{
+    display: flex;
+    gap: 1rem;
+}
+.hero-button{
     font-weight: 450;
     font-size: 0.9rem;
-
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    display: block;
 }
-.nav-button-1{
+.hero-button-1{
     color: #fff;
-    background-color: var(--primary);
+    background-color: var(--primary); 
+    border: 1px solid var(--primary);
 }
-.nav-button-1:hover {
+.hero-button-1:hover,
+.hero-button-1:active {
     background-color: var(--primary-hover);
 }
-.nav-button-2{
+.hero-button-2{
     color: var(--blue);
     background-color: transparent;
+    border: 1px solid var(--blue);
 }
-.nav-button-2:hover{
+.hero-button-2:hover,
+.hero-button-2:active{
     background-color: transparent;
 }
-.nav-button-3{
+.hero-button-3{
     color: var(--green);
     background-color: transparent;
+    border: 1px solid var(--green);
+    
 }
-.nav-button-3:hover{
+.hero-button-3:hover,
+.hero-button-3:active{
     background-color: transparent;
 }
 
