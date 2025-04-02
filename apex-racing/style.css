@@ -1,6 +1,24 @@
-:root{
-    --background-color: black;
-    --primary: #ff0000;
+:root {
+    --background-color: #000000;
+    --foreground: #ffffff;
+    --primary: #dc2626;
+    --primary-hover: #b91c1c;
+    --secondary: #1f2937;
+    --secondary-hover: #374151;
+    --muted: #6b7280;
+    --muted-foreground: #9ca3af;
+    --accent: #111827;
+    --accent-foreground: #f9fafb;
+    --border: #374151;
+    --input: #374151;
+    --ring: #dc2626;
+    --radius: 0.5rem;
+    --blue: #3b82f6;
+    --blue-hover: #2563eb;
+    --green: #10b981;
+    --green-hover: #059669;
+    --yellow: #f59e0b;
+    --red: #ef4444;
 }
 *{
     margin: 0;
@@ -20,7 +38,7 @@ header{
     top: 0;
 }
 .mobile-nav-toggle {
-    display: none; /* Hidden by default */
+    display: none; 
     border: 0;
     position: absolute;
     background: url(asset/menu_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg);
@@ -29,7 +47,14 @@ header{
     background-repeat: no-repeat;
     z-index: 1000;
 }
-
+.landing{
+    background-image: linear-gradient(to right, red,rgba(64, 113, 247, 0.993));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+}
 nav{
     display: flex;
     justify-content: space-between;
@@ -39,6 +64,33 @@ nav{
     padding: 1.3rem 2rem;
 
 }
+.nav-button{
+    font-weight: 450;
+    font-size: 0.9rem;
+
+}
+.nav-button-1{
+    color: #fff;
+    background-color: var(--primary);
+}
+.nav-button-1:hover {
+    background-color: var(--primary-hover);
+}
+.nav-button-2{
+    color: var(--blue);
+    background-color: transparent;
+}
+.nav-button-2:hover{
+    background-color: transparent;
+}
+.nav-button-3{
+    color: var(--green);
+    background-color: transparent;
+}
+.nav-button-3:hover{
+    background-color: transparent;
+}
+
 .nav-left-container {
     background-image: linear-gradient(to right, red,rgba(64, 113, 247, 0.993));
     color: #ff0000;
@@ -64,7 +116,7 @@ nav{
     display: flex;
     align-items: center;
     gap: 0.2rem;
-}sticky
+}
 .nav-link:hover,
 .nav-link.active {
   color: var(--primary);
