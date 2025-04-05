@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -14,13 +15,12 @@ func main() {
 	word, _ = input.ReadString('\n')
 	if(len(word) != 1){
 		for k:=0;k<len(word);k++{
-			_, found := m[string(word[k])]
+			upper:=strings.ToUpper(string(word[k]))
+			_, found := m[upper]
 			if(found){
-				m[string(word[k])]+=1
-			}else if word[k] >= 65 && word[k]<= 122{
-				if word[k] > 96 || word[k]< 91 {
-					m[string(word[k])]=1
-				}
+				m[upper]+=1
+			}else if word[k] >= 65 && word[k]<= 190{
+				m[upper]=1
 			}
 		}
 	}else{
