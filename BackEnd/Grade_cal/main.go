@@ -7,21 +7,22 @@ import (
 	"strings"
 )
 
-type student struct{
-	name string;
-	subject map[string]float64;
+type student struct {
+	name    string
+	subject map[string]float64
 }
-func (s student) cal_grade()  float64{
-	total := 0.0;
-	for _,v := range s.subject {
-		total+= v;
+
+func (s student) cal_grade() float64 {
+	total := 0.0
+	for _, v := range s.subject {
+		total += v
 	}
-	var average float64= total / float64(len(s.subject));
+	var average float64 = total / float64(len(s.subject))
 
-	return average;
+	return average
 }
 
-func main(){
+func main() {
 
 	// var a student;
 	// a.name = "chala"
@@ -30,39 +31,37 @@ func main(){
 	// a.subject["amharic"]=42.5
 
 	// fmt.Printf("%v got an average of %v",a.name,a.cal_grade())
-	var stud student;
-	fmt.Print("Enter name: ");
+	var stud student
+	fmt.Print("Enter name: ")
 
-	input:= bufio.NewReader(os.Stdin)
-	stud.name,_ = input.ReadString('\n')
+	input := bufio.NewReader(os.Stdin)
+	stud.name, _ = input.ReadString('\n')
 
-	stud.name= strings.TrimSpace(stud.name);
+	stud.name = strings.TrimSpace(stud.name)
 	stud.subject = make(map[string]float64)
 
+	var num int
+	fmt.Print("Enter the number of subjects: ")
+	fmt.Scan(&num)
 
-	
-	var num int;
-	fmt.Print("Enter the number of subjects: ");
-	fmt.Scan(&num);
+	var sub_name string = ""
+	var sub_grade int = 0
 
-	var sub_name string ="";
-	var sub_grade int= 0;
+	for i := 1; i < num+1; i++ {
 
-	for i:= 1; i< num+1;i++{
-		
-		fmt.Printf("Enter the name of subject %v and the Score recived \nName\tScore: ", i);
-		fmt.Scan(&sub_name,&sub_grade)
-		for sub_grade > 100 || sub_grade < 0{
-			fmt.Printf("Score of %v must be between 0-100 \nEnter Score:\t",sub_name);
-			fmt.Scan(&sub_grade);
+		fmt.Printf("Enter the name of subject %v and the Score recived \nName\tScore: ", i)
+		fmt.Scan(&sub_name, &sub_grade)
+		for sub_grade > 100 || sub_grade < 0 {
+			fmt.Printf("Score of %v must be between 0-100 \nEnter Score:\t", sub_name)
+			fmt.Scan(&sub_grade)
 		}
-		stud.subject[sub_name]=float64(sub_grade)
-	} 
-	
-	fmt.Printf("%v \nSubject \t Score\n",stud.name)
-
-	for k,v := range stud.subject{
-		fmt.Printf("%v \t %v\n",k,v)
+		stud.subject[sub_name] = float64(sub_grade)
 	}
-	fmt.Printf("Average of: \t %v",stud.cal_grade())
+
+	fmt.Printf("------------------------\n%v\n------------------------\nSubject \t Score\n", stud.name)
+
+	for k, v := range stud.subject {
+		fmt.Printf("%-14v...%0.3f\n", k+":", v)
+	}
+	fmt.Printf("Average of: \t %0.3f\n------------------------", stud.cal_grade())
 }
