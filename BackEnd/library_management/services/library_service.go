@@ -7,6 +7,7 @@ import (
 
 type LibraryManager interface {
 	AddBook(book models.Book)
+	AddMember(member models.Member)
 	RemoveBook(bookID int)
 	BorrowBook(bookID int, memberID int) error
 	ReturnBook(bookID int, memberID int) error
@@ -63,21 +64,21 @@ func (l Library) ReturnBook(bookID int, memberID int) error {
 	l.members[memberID] = member
 	return nil
 }
-func (l Library) ListAvailableBooks() []models.Book{
+func (l Library) ListAvailableBooks() []models.Book {
 	books := []models.Book{}
-	for _,v := range l.books {
-		if v.Status == "Available"{
-			books=append(books,v)
+	for _, v := range l.books {
+		if v.Status == "Available" {
+			books = append(books, v)
 		}
 	}
 
 	return books
 }
-func (l Library)ListBorrowedBooks(memberID int) []models.Book{
+func (l Library) ListBorrowedBooks(memberID int) []models.Book {
 	books := []models.Book{}
-	for _,v := range l.books {
-		if v.Status == "Borrowed"{
-			books=append(books,v)
+	for _, v := range l.books {
+		if v.Status == "Borrowed" {
+			books = append(books, v)
 		}
 	}
 	return books
