@@ -13,14 +13,7 @@ import (
 var input = bufio.NewReader(os.Stdin)
 var library = services.NewLibrary()
 
-type LibraryController struct {
-	service services.LibraryManager
-}
-
-func NewLibraryController(service services.LibraryManager) *LibraryController {
-	return &LibraryController{service: service}
-}
-func (lbcon *LibraryController) newBook(ID int, title string, author string) *models.Book {
+func newBook(ID int, title string, author string) *models.Book {
 	book := models.Book{
 		ID:     ID,
 		Title:  title,
@@ -29,7 +22,7 @@ func (lbcon *LibraryController) newBook(ID int, title string, author string) *mo
 	}
 	return &book
 }
-func (lbcon *LibraryController) newMember(ID int, name string) *models.Member {
+func newMember(ID int, name string) *models.Member {
 	member := models.Member{
 		ID:            ID,
 		Name:          name,
@@ -37,7 +30,7 @@ func (lbcon *LibraryController) newMember(ID int, name string) *models.Member {
 	}
 	return &member
 }
-func (lbcon *LibraryController) AddBook() {
+func AddBook() {
 	fmt.Println("Enter ID: ")
 	idStr, _ := input.ReadString('\n')
 	idStr = strings.Trim(idStr, "\n")
@@ -56,9 +49,9 @@ func (lbcon *LibraryController) AddBook() {
 	author, _ := input.ReadString('\n')
 	author = strings.Trim(author, "\n")
 
-	library.AddBook(*lbcon.newBook(id, title, author))
+	library.AddBook(*newBook(id, title, author))
 }
-func (lbcon *LibraryController) AddMember() {
+func AddMember() {
 	fmt.Println("Enter ID: ")
 	idStr, _ := input.ReadString('\n')
 	idStr = strings.Trim(idStr, "\n")
@@ -73,5 +66,30 @@ func (lbcon *LibraryController) AddMember() {
 	name, _ := input.ReadString('\n')
 	name = strings.Trim(name, "\n")
 
-	library.AddMember(*lbcon.newMember(id, name))
+	library.AddMember(*newMember(id, name))
+}
+
+func Start() {
+	library.AddBook(*newBook(9781982103750, "Becoming Bulletproof", "Evy Poumpouras"))
+	library.AddBook(*newBook(9781934255155, "The Art of War", "Sun Tzu & Lionel Giles & Shawn Conners"))
+	library.AddBook(*newBook(9781476788654, "How Champions Think", "Bob Rotella"))
+	fmt.Println("Wellcome to Library\nChoose from the options:-")
+	fmt.Println("0.see available books")
+	fmt.Println("----------------------------------")
+	S, _ := input.ReadString('\n')
+	fmt.Println("----------------------------------")
+	S = strings.Trim(S, "\n")
+
+	choice, err := strconv.Atoi(S)
+
+	if err != nil || choice > 10 {
+		fmt.Println("Make sure the U Entered Number:")
+		return
+	}
+	if choice == 0 {
+		for _,k := range library.ListAvailableBooks() {
+			fmt.Println(k,"\t")
+		}
+	}
+
 }
